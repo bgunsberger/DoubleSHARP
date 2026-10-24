@@ -29,7 +29,7 @@ See [provenance.json](../examples/tree/provenance.json) for source hashes, model
 
 ## Screenshot protocol
 
-The paired images are original 1280 × 720 browser screenshots, with 45° horizontal orbit, zero pitch, target `(0.3, 0.15, -2.3)` and camera distance `2.7` in the estimated scene units. Each scene uses exactly the same camera and field of view. The shared camera moves closer and pans toward the sculpture to emphasize the canopy/pedestal discontinuity. Outer branches can extend beyond the close-up frame. The README displays each capture at full width. The WebGL preview uses the exported splat's color, opacity, scale and rotation parameters. There is no retouching or separate per-scene framing.
+The paired images are original 1280 × 720 browser screenshots, with −45° horizontal orbit, zero pitch, target `(-0.3, 0.15, -2.3)` and camera distance `2.7` in the estimated scene units. Each scene uses exactly the same camera and field of view. The shared camera moves closer and pans toward the sculpture to emphasize the canopy/pedestal discontinuity. Outer branches can extend beyond the close-up frame. The README displays each capture at full width. The WebGL preview uses the exported splat's color, opacity, scale and rotation parameters. There is no retouching or separate per-scene framing.
 
 The 45° view reveals the baseline canopy/pedestal depth discontinuity. DoubleSHARP reduces the separation on this capture. Both scenes have visible incomplete surfaces, floaters and disocclusion artifacts. A 45° orbit is a diagnostic stress view; small viewpoint changes are the more suitable presentation range for the underlying monocular reconstruction.
 

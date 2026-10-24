@@ -6,7 +6,7 @@ An experimental two-photo depth-conditioning pipeline for [Apple SHARP](https://
 
 ## Tree example at 45°
 
-Both images below use the same camera: 45° horizontal orbit, zero pitch, target `(0.3, 0.15, -2.3)`, distance `2.7` in the estimated scene units. These are unretouched WebGL screenshots of the reconstructed scenes.
+Both images below use the same camera: −45° horizontal orbit, zero pitch, target `(-0.3, 0.15, -2.3)`, distance `2.7` in the estimated scene units. These are unretouched WebGL screenshots of the reconstructed scenes.
 
 ### Baseline SHARP
 
@@ -40,7 +40,7 @@ cd DoubleSHARP
 ./preview.sh
 ```
 
-Open [the local comparison](http://127.0.0.1:8873/web/sharp-conditioned-comparison.html). Choose **45° close-up** to reproduce the illustrated angle. The [45° permalink](http://127.0.0.1:8873/web/sharp-conditioned-comparison.html?yaw=45&dist=2.7&tx=0.3&ty=0.15&tz=-2.3) also restores that camera.
+Open [the local comparison](http://127.0.0.1:8873/web/sharp-conditioned-comparison.html). Choose **−45° close-up** to reproduce the illustrated angle. The [45° permalink](http://127.0.0.1:8873/web/sharp-conditioned-comparison.html?yaw=-45&dist=2.7&tx=-0.3&ty=0.15&tz=-2.3) also restores that camera.
 
 Setup clones pinned upstream sources and installs the Python environment. The first inference downloads roughly 7.5 GB of SHARP and DA3 Giant checkpoints from their publishers. Neural inference runs on MPS. The WebGL preview runs in the browser. Input photographs stay local during reconstruction.
 

@@ -22,10 +22,10 @@
     }
   ],
   "camera": {
-    "horizontal_orbit_degrees": 45,
+    "horizontal_orbit_degrees": -45,
     "pitch_degrees": 0,
     "target": [
-      0.3,
+      -0.3,
       0.15,
       -2.3
     ],
@@ -74,8 +74,8 @@
       720
     ],
     "sha256": {
-      "sharp-baseline-45.png": "c598ed95105829a22dd7b5e27e761855579bc1541f3966ac3fd0e50cb13d8e6b",
-      "doublesharp-45.png": "eca6c13dbb508dc7cdeb21ab209be2c97ae3a64c8a6fd3f719d669ed6c465a4a"
+      "sharp-baseline-45.png": "2a48ef96af648103a5be71789ef41a3e1ddde3e68121b3e68d15dd0181129997",
+      "doublesharp-45.png": "a2eeb619ddf6eef65b5b9cc380de4b7531b51ab7319bebc1c58943673bb34521"
     }
   }
 }
