@@ -29,9 +29,12 @@ See [provenance.json](../examples/tree/provenance.json) for source hashes, model
 
 ## Screenshot protocol
 
-The paired images are original 1280 × 720 browser screenshots, with −45° horizontal orbit, zero pitch, target `(-0.3, 0.15, -2.3)` and camera distance `2.7` in the estimated scene units. Each scene uses exactly the same camera and field of view. The shared camera moves closer and pans toward the sculpture to emphasize the canopy/pedestal discontinuity. Outer branches can extend beyond the close-up frame. The README displays each capture at full width. The WebGL preview uses the exported splat's color, opacity, scale and rotation parameters. There is no retouching or separate per-scene framing.
+The paired images are original 1280 × 720 browser screenshots from the second photograph's DA3-estimated camera. We compute the relative world-to-camera pose `E1 @ inverse(E0)`, scale its translation by the same global factor used for depth conditioning, and convert the camera matrix from OpenCV to the WebGL coordinate convention. The viewer applies the second view's predicted intrinsics with aspect-preserving viewport fitting. Translation, tilt and roll are preserved. Both scenes use exactly the same camera, projection and viewport, with no separate per-scene framing or retouching.
 
-The 45° view reveals the baseline canopy/pedestal depth discontinuity. DoubleSHARP reduces the separation on this capture. Both scenes have visible incomplete surfaces, floaters and disocclusion artifacts. A 45° orbit is a diagnostic stress view; small viewpoint changes are the more suitable presentation range for the underlying monocular reconstruction.
+The camera parameters are saved in [second-view-camera.json](../examples/tree/second-view-camera.json). They are jointly estimated from the two photos and have no independent calibration ground truth. The second photograph is an input to DA3, so this comparison is not a held-out-view evaluation.
+
+This view reveals the baseline canopy/pedestal depth discontinuity. DoubleSHARP reduces the separation on this capture. Both scenes retain incomplete surfaces, floaters and disocclusion artifacts.
+
 
 ## Limits
 

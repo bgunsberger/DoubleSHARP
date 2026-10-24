@@ -287,20 +287,29 @@ function frameToData() {
   if (!_p.has("dist")) dist = Math.max(0.5, 0.7*diag);
   framed = true; sortDirty = true;
 }
+let fixedCamera=null;
+let secondCamera=null;
+const secondCameraPromise=(_p.get("camera")==="second" ? loadSecondCamera() : Promise.resolve());
+async function loadSecondCamera(){
+  if(!secondCamera){const response=await fetch('/examples/tree/second-view-camera.json');if(!response.ok)throw Error('Second-view camera unavailable');secondCamera=await response.json();}
+  fixedCamera=secondCamera;sortDirty=true;
+}
 const keys = {};
 $("view-title").textContent = _p.get("label") || "SHARP";
 addEventListener("message", e => {
   if(e.origin!==location.origin || e.data.type!=="sharp-camera")return;
+  if(e.data.camera==="second"){loadSecondCamera();return;}
+  fixedCamera=null;
   yaw=e.data.yaw; pitch=e.data.pitch; target=e.data.target; dist=e.data.dist;sortDirty=true;
 });
 addEventListener("keydown", e => keys[e.key.toLowerCase()] = true);
 addEventListener("keyup",   e => keys[e.key.toLowerCase()] = false);
 let drag=false, lx=0, ly=0;
-canvas.addEventListener("pointerdown", e => { drag=true; lx=e.clientX; ly=e.clientY; canvas.setPointerCapture(e.pointerId); });
+canvas.addEventListener("pointerdown", e => {fixedCamera=null; drag=true; lx=e.clientX; ly=e.clientY; canvas.setPointerCapture(e.pointerId); });
 canvas.addEventListener("pointerup",   e => drag=false);
 canvas.addEventListener("pointermove", e => { if(!drag)return; yaw -= (e.clientX-lx)*0.005; pitch -= (e.clientY-ly)*0.005;
   pitch = Math.max(-1.5, Math.min(1.5, pitch)); lx=e.clientX; ly=e.clientY; sortDirty=true; });
-canvas.addEventListener("wheel", e => { dist *= Math.exp(e.deltaY*0.001); dist=Math.max(0.2,Math.min(10,dist)); sortDirty=true; e.preventDefault(); }, {passive:false});
+canvas.addEventListener("wheel", e => {fixedCamera=null; dist *= Math.exp(e.deltaY*0.001); dist=Math.max(0.2,Math.min(10,dist)); sortDirty=true; e.preventDefault(); }, {passive:false});
 
 function mat4Mul(a,b){ const o=new Float32Array(16); for(let i=0;i<4;i++)for(let j=0;j<4;j++){let s=0;for(let k=0;k<4;k++)s+=a[k*4+j]*b[i*4+k];o[i*4+j]=s;} return o; }
 function perspective(fovy, aspect, n, f){ const t=1/Math.tan(fovy/2); return new Float32Array([t/aspect,0,0,0, 0,t,0,0, 0,0,(f+n)/(n-f),-1, 0,0,(2*f*n)/(n-f),0]); }
@@ -328,12 +337,20 @@ function render(){
   if(keys["d"]||keys["arrowright"]){for(let i=0;i<3;i++) target[i]+=right[i]*speed; sortDirty=true; }
 
   const eye=[target[0]+dist*Math.sin(yaw)*Math.cos(pitch), target[1]+dist*Math.sin(pitch), target[2]+dist*Math.cos(yaw)*Math.cos(pitch)];
-  const view=lookAt(eye,target,[0,1,0]);
+  const view=fixedCamera ? new Float32Array(fixedCamera.view_matrix_column_major) : lookAt(eye,target,[0,1,0]);
   const aspect=canvas.width/canvas.height;
   const imageAspect = 8368 / 5584;
   const fovy = 2*Math.atan(canvas.height / (2 * Math.min(canvas.width/8368, canvas.height/5584) * 6510.359607749961));
-  const proj=perspective(fovy, aspect, 0.05, 100000);
-  const fy=canvas.height/(2*Math.tan(fovy/2)), fx=fy;
+  let proj=perspective(fovy, aspect, 0.05, 100000);
+  let fy=canvas.height/(2*Math.tan(fovy/2)), fx=fy;
+  if(fixedCamera){
+    const [w,h]=fixedCamera.image_size,K=fixedCamera.intrinsics;
+    const fit=Math.min(canvas.width/w,canvas.height/h);
+    fx=K[0][0]*fit;fy=K[1][1]*fit;
+    const cx=(canvas.width-w*fit)/2+K[0][2]*fit,cy=(canvas.height-h*fit)/2+K[1][2]*fit;
+    const n=.05,f=100000;
+    proj=new Float32Array([2*fx/canvas.width,0,0,0, 0,2*fy/canvas.height,0,0, 1-2*cx/canvas.width,2*cy/canvas.height-1,(f+n)/(n-f),-1, 0,0,2*f*n/(n-f),0]);
+  }
 
   if(sortDirty){
     if(parent!==window) parent.postMessage({type:"sharp-camera-state",yaw,pitch,target,dist},location.origin);

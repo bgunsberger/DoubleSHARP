@@ -4,17 +4,17 @@ An experimental two-photo depth-conditioning pipeline for [Apple SHARP](https://
 
 [Depth Anything 3](https://github.com/ByteDance-Seed/Depth-Anything-3) estimates depth jointly from both photos. DoubleSHARP supplies that depth to SHARP **before Gaussian initialization**, then reruns its learned Gaussian prediction. SHARP's image features still come from the reference photograph.
 
-## Tree example at 45°
+## Tree example from the second photo camera
 
-Both images below use the same camera: −45° horizontal orbit, zero pitch, target `(-0.3, 0.15, -2.3)`, distance `2.7` in the estimated scene units. These are unretouched WebGL screenshots of the reconstructed scenes.
+Both renders below use the second photograph's complete camera pose and intrinsics, estimated jointly by DA3. Translation is converted to the shared SHARP scale. These are unretouched WebGL screenshots; the estimated camera has no independent calibration ground truth.
 
 ### Baseline SHARP
 
-![Baseline SHARP at 45 degrees](docs/images/sharp-baseline-45.png)
+![Baseline SHARP from the second photo camera](docs/images/sharp-baseline-second-view.png)
 
 ### DoubleSHARP
 
-![DoubleSHARP at 45 degrees](docs/images/doublesharp-45.png)
+![DoubleSHARP from the second photo camera](docs/images/doublesharp-second-view.png)
 
 Baseline SHARP places much of the canopy too far behind the pedestal, producing a visible separation when viewed from the side. In this capture, conditioning SHARP on joint two-view depth brings the canopy closer to the pedestal and reduces that separation. Floaters, incomplete surfaces, and disocclusion artifacts remain visible at this angle. This is one qualitative example with no depth ground truth.
 
@@ -40,7 +40,7 @@ cd DoubleSHARP
 ./preview.sh
 ```
 
-Open [the local comparison](http://127.0.0.1:8873/web/sharp-conditioned-comparison.html). Choose **−45° close-up** to reproduce the illustrated angle. The [45° permalink](http://127.0.0.1:8873/web/sharp-conditioned-comparison.html?yaw=-45&dist=2.7&tx=-0.3&ty=0.15&tz=-2.3) also restores that camera.
+Open [the local comparison](http://127.0.0.1:8873/web/sharp-conditioned-comparison.html). Choose **Second photo camera** to reproduce the illustrated viewpoint. The [second-camera permalink](http://127.0.0.1:8873/web/sharp-conditioned-comparison.html?camera=second) also restores that camera.
 
 Setup clones pinned upstream sources and installs the Python environment. The first inference downloads roughly 7.5 GB of SHARP and DA3 Giant checkpoints from their publishers. Neural inference runs on MPS. The WebGL preview runs in the browser. Input photographs stay local during reconstruction.
 

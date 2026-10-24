@@ -32,5 +32,8 @@ sources=json.loads((root/'output/sharp-multiview/depth-meta.json').read_text())[
 for i,path in enumerate(sources):
     image=Image.open(path).convert('RGB');image.thumbnail((1200,1200))
     image.save(root/f'output/sharp-multiview/input-{i}.jpg',quality=90)
+from second_view_camera import add_second_view_support, write_second_view_camera
+write_second_view_camera(root)
+s=add_second_view_support(s)
 # Parent drives shared controls; individual iframe gestures stay local.
 (root/'web/sharp-viewer.html').write_text('<!-- Adapted from localai-org/free-splatter.cpp (Apache-2.0). See NOTICE. -->\n'+s)

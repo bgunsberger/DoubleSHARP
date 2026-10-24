@@ -22,16 +22,46 @@
     }
   ],
   "camera": {
-    "horizontal_orbit_degrees": -45,
-    "pitch_degrees": 0,
-    "target": [
-      -0.3,
-      0.15,
-      -2.3
+    "type": "Second photograph camera estimated jointly by DA3",
+    "parameters_file": "examples/tree/second-view-camera.json",
+    "source": "2026_10_L1101219.jpg",
+    "intrinsics": [
+      [
+        373.0919494628906,
+        0.0,
+        252.0
+      ],
+      [
+        0.0,
+        371.1805419921875,
+        168.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0
+      ]
     ],
-    "distance": 2.7,
+    "view_matrix_column_major": [
+      0.8535864260151852,
+      -0.056683523178454445,
+      -0.5178581766513177,
+      0.0,
+      0.1049082484083307,
+      0.9924013623466588,
+      0.06429453831954457,
+      0.0,
+      0.510278790114237,
+      -0.1092085439313877,
+      0.8530468936870687,
+      0.0,
+      1.1410212712388839,
+      -0.42232611282823174,
+      -0.8072087175100447,
+      1.0
+    ],
     "scene_units": "estimated SHARP scale",
-    "focal_px": 6510.359607749961
+    "ground_truth_calibration": false
   },
   "reconstruction_report": {
     "mode": "native",
@@ -66,16 +96,16 @@
     "da3_giant_weights": "7cd62ae9315b9dff094d2d300e4ad012640607dd"
   },
   "screenshots": {
-    "baseline": "docs/images/sharp-baseline-45.png",
-    "doublesharp": "docs/images/doublesharp-45.png",
+    "baseline": "docs/images/sharp-baseline-second-view.png",
+    "doublesharp": "docs/images/doublesharp-second-view.png",
     "processing": "Unretouched browser screenshots, losslessly packaged as PNG without changing decoded pixels; same camera parameters.",
     "viewport": [
       1280,
       720
     ],
     "sha256": {
-      "sharp-baseline-45.png": "2a48ef96af648103a5be71789ef41a3e1ddde3e68121b3e68d15dd0181129997",
-      "doublesharp-45.png": "a2eeb619ddf6eef65b5b9cc380de4b7531b51ab7319bebc1c58943673bb34521"
+      "sharp-baseline-second-view.png": "1b84bddaea6bc6154c075ee527aeaddded7c711953df8215fd4e86f36444a950",
+      "doublesharp-second-view.png": "6526c3b6380df42accb844f377a46f9fb02f0c7595bd273e51e4d9b45f69664d"
     }
   }
 }
