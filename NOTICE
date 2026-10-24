@@ -1,0 +1,19 @@
+DoubleSharp
+Copyright 2026 Ben Gunsberger
+
+Original DoubleSharp orchestration scripts and documentation are licensed under
+Apache License 2.0, except example photographs and rendered screenshots.
+
+The browser viewer is adapted from free-splatter.cpp by localai-org:
+https://github.com/localai-org/free-splatter.cpp
+Revision: bf636c4fc2cf4117649eccab64909d3937bbbcdb
+License: Apache License 2.0
+Changes: source-camera framing, shared comparison controls, labels and export
+compatibility. See scripts/build_sharp_viewer.py and web/sharp-viewer.html.
+
+DoubleSharp integrates Apple SHARP and Depth Anything 3. Their source and model
+licenses apply separately. See THIRD_PARTY.md and licenses/. Model weights are
+obtained from the upstream publishers and are not included in this repository.
+
+Apple Machine Learning Research Model is licensed under the Apple Machine
+Learning Research Model License Agreement.

@@ -1,0 +1,81 @@
+{
+  "project": "DoubleSharp",
+  "date": "2026-10-24",
+  "sources": [
+    {
+      "path": "examples/tree/2026_10_L1101215.jpg",
+      "width": 8368,
+      "height": 5584,
+      "sha256": "a4345e424e057d513d444bbd3ccf4442d246e5f54ef0551514955635db4e4b55",
+      "decoded_rgb_sha256": "28313b1ce528979570c8c27cfd06df4529da5641dc9bac5e5c4cdd9a03bce444",
+      "role": "reference",
+      "metadata": "GPS and device-serial fields removed; decoded RGB pixels verified unchanged"
+    },
+    {
+      "path": "examples/tree/2026_10_L1101219.jpg",
+      "width": 8368,
+      "height": 5584,
+      "sha256": "d61e62d4e8b69c19682c6550872868bb87e46b8e222e9728a10e745b320eecb6",
+      "decoded_rgb_sha256": "9e43fe41593ca2d53cff0ea24016fe455b1e77cbaaa056a349ae51a9853507c7",
+      "role": "second_view",
+      "metadata": "GPS and device-serial fields removed; decoded RGB pixels verified unchanged"
+    }
+  ],
+  "camera": {
+    "horizontal_orbit_degrees": 45,
+    "pitch_degrees": 0,
+    "target": [
+      0,
+      0,
+      -2
+    ],
+    "distance": 4,
+    "scene_units": "estimated SHARP scale",
+    "focal_px": 6510.359607749961
+  },
+  "reconstruction_report": {
+    "mode": "native",
+    "device": "mps",
+    "seconds": 19.350382875010837,
+    "gaussians": 1179648,
+    "post_prediction_geometric_edits": false,
+    "forward_call_counts": {
+      "initializer": 1,
+      "feature_model": 1,
+      "prediction_head": 1,
+      "composer": 1
+    },
+    "scale_anchor_pixels": 7010,
+    "two_view_to_sharp_scale": 4.310812473297119,
+    "prior": "Full-frame DA3 joint two-view depth, scaled by pedestal anchor; no post-warp field or canopy fit",
+    "initializer_depth_mean_abs_log_change": 0.2744686007499695,
+    "initializer_depth_canopy_median": 1.6019363403320312,
+    "initializer_depth_pedestal_median": 1.4902477264404297,
+    "output_changes": {
+      "mean_vectors": 3.311933994293213,
+      "singular_values": 0.007856769487261772,
+      "quaternions": 0.05497635155916214,
+      "colors": 0.007751035038381815,
+      "opacities": 0.03168197348713875
+    },
+    "limitation": "Released SHARP remains a monocular appearance/feature model. Conditioning is inference-time and untrained on this DA3 prior."
+  },
+  "model_sources": {
+    "sharp": "aed6527499ef91cba3b54c18d49a870f25947190",
+    "da3": "3d835ec1a5802d64a8b8b15f817a1ab54809bfe4",
+    "da3_giant_weights": "7cd62ae9315b9dff094d2d300e4ad012640607dd"
+  },
+  "screenshots": {
+    "baseline": "docs/images/sharp-baseline-45.png",
+    "doublesharp": "docs/images/doublesharp-45.png",
+    "processing": "Unretouched browser screenshots, losslessly packaged as PNG without changing decoded pixels; same camera parameters.",
+    "viewport": [
+      1280,
+      720
+    ],
+    "sha256": {
+      "sharp-baseline-45.png": "c3f6425e182d86ddebd9ac543070636bd5abb7876c80aed40a6e6927ac98b573",
+      "doublesharp-45.png": "ef61fbbf06fa3f678a79398e238f6e0eb0c6b377c363117ecb66474e2cf88855"
+    }
+  }
+}

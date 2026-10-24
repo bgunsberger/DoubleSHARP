@@ -1,0 +1,20 @@
+diff --git a/src/depth_anything_3/api.py b/src/depth_anything_3/api.py
+index d0f18aa..e6bd7e1 100644
+--- a/src/depth_anything_3/api.py
++++ b/src/depth_anything_3/api.py
+@@ -31,7 +31,6 @@ from PIL import Image
+ from depth_anything_3.cfg import create_object, load_config
+ from depth_anything_3.registry import MODEL_REGISTRY
+ from depth_anything_3.specs import Prediction
+-from depth_anything_3.utils.export import export
+ from depth_anything_3.utils.geometry import affine_inverse
+ from depth_anything_3.utils.io.input_processor import InputProcessor
+ from depth_anything_3.utils.io.output_processor import OutputProcessor
+@@ -223,6 +222,7 @@ class DepthAnything3(nn.Module, PyTorchModelHubMixin):
+ 
+         # Export if requested
+         if export_dir is not None:
++            from depth_anything_3.utils.export import export
+ 
+             if "gs" in export_format:
+                 if infer_gs and "gs_video" not in export_format:
