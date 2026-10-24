@@ -25,11 +25,11 @@
     "horizontal_orbit_degrees": 45,
     "pitch_degrees": 0,
     "target": [
-      0,
-      0,
-      -2
+      0.3,
+      0.15,
+      -2.3
     ],
-    "distance": 4,
+    "distance": 2.7,
     "scene_units": "estimated SHARP scale",
     "focal_px": 6510.359607749961
   },
@@ -74,8 +74,8 @@
       720
     ],
     "sha256": {
-      "sharp-baseline-45.png": "c3f6425e182d86ddebd9ac543070636bd5abb7876c80aed40a6e6927ac98b573",
-      "doublesharp-45.png": "ef61fbbf06fa3f678a79398e238f6e0eb0c6b377c363117ecb66474e2cf88855"
+      "sharp-baseline-45.png": "c598ed95105829a22dd7b5e27e761855579bc1541f3966ac3fd0e50cb13d8e6b",
+      "doublesharp-45.png": "eca6c13dbb508dc7cdeb21ab209be2c97ae3a64c8a6fd3f719d669ed6c465a4a"
     }
   }
 }
