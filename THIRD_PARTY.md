@@ -1,6 +1,6 @@
 # Third-party components and model licenses
 
-The root Apache 2.0 license covers original DoubleSharp code and documentation.
+The root Apache 2.0 license covers original DoubleSHARP code and documentation.
 Example photographs and rendered screenshots are excluded from that grant.
 Each upstream component retains its own license. The complete reconstruction
 pipeline is a research experiment with restricted model licenses.
@@ -14,11 +14,11 @@ pipeline is a research experiment with restricted model licenses.
 | WebGL viewer | [`free-splatter.cpp bf636c4`](https://github.com/localai-org/free-splatter.cpp/tree/bf636c4fc2cf4117649eccab64909d3937bbbcdb) | Apache 2.0; attribution in [NOTICE](NOTICE) |
 
 Apple Machine Learning Research Model is licensed under the Apple Machine Learning
-Research Model License Agreement. DoubleSharp supplies external depth through
+Research Model License Agreement. DoubleSHARP supplies external depth through
 SHARP's existing inference argument and reruns the released prediction network.
 The SHARP checkpoint is used without retraining or changing its weights.
 
-DA3 Giant is developed by ByteDance Seed Team. DoubleSharp uses its jointly
+DA3 Giant is developed by ByteDance Seed Team. DoubleSHARP uses its jointly
 predicted depths, confidences and camera poses. The only local DA3 source patch
 makes optional export imports lazy; see `patches/da3-lazy-export.patch`.
 

@@ -1,16 +1,16 @@
-# DoubleSharp
+# DoubleSHARP
 
 An experimental two-photo depth-conditioning pipeline for [Apple SHARP](https://github.com/apple/ml-sharp), running locally on Apple Silicon.
 
-[Depth Anything 3](https://github.com/ByteDance-Seed/Depth-Anything-3) estimates depth jointly from both photos. DoubleSharp supplies that depth to SHARP **before Gaussian initialization**, then reruns its learned Gaussian prediction. SHARP's image features still come from the reference photograph.
+[Depth Anything 3](https://github.com/ByteDance-Seed/Depth-Anything-3) estimates depth jointly from both photos. DoubleSHARP supplies that depth to SHARP **before Gaussian initialization**, then reruns its learned Gaussian prediction. SHARP's image features still come from the reference photograph.
 
 ## Tree example at 45°
 
 Both images below use the same camera: 45° horizontal orbit, zero pitch, target `(0, 0, -2)`, distance `4` in the estimated scene units. These are unretouched WebGL screenshots of the reconstructed scenes.
 
-| Baseline SHARP | DoubleSharp |
+| Baseline SHARP | DoubleSHARP |
 | --- | --- |
-| ![Baseline SHARP at 45 degrees](docs/images/sharp-baseline-45.png) | ![DoubleSharp at 45 degrees](docs/images/doublesharp-45.png) |
+| ![Baseline SHARP at 45 degrees](docs/images/sharp-baseline-45.png) | ![DoubleSHARP at 45 degrees](docs/images/doublesharp-45.png) |
 
 Baseline SHARP places much of the canopy too far behind the pedestal, producing a visible separation when viewed from the side. In this capture, conditioning SHARP on joint two-view depth brings the canopy closer to the pedestal and reduces that separation. Floaters, incomplete surfaces, and disocclusion artifacts remain visible at this angle. This is one qualitative example with no depth ground truth.
 
@@ -27,8 +27,8 @@ Both full-resolution **8368 × 5584** JPEGs are included in [examples/tree](exam
 Tested on an Apple M4 Pro with 48 GB unified memory, Python 3.12, and PyTorch MPS. Install [uv](https://docs.astral.sh/uv/getting-started/installation/), Git, and Apple's command-line tools, then:
 
 ```bash
-git clone https://github.com/bgunsberger/DoubleSharp.git
-cd DoubleSharp
+git clone https://github.com/bgunsberger/DoubleSHARP.git
+cd DoubleSHARP
 ./setup-sharp-multiview.sh
 ./run-doublesharp.sh \
   examples/tree/2026_10_L1101215.jpg \
@@ -56,6 +56,6 @@ This is inference-time integration of released models. It uses their existing le
 
 ## License
 
-Original DoubleSharp code is **Apache 2.0**. The complete pipeline has separate model restrictions: **SHARP's checkpoint is restricted to noncommercial scientific research and excludes product development**, and **DA3 Giant is CC BY-NC 4.0**. The code license does not expand those model permissions. See [THIRD_PARTY.md](THIRD_PARTY.md), [NOTICE](NOTICE), and [licenses](licenses).
+Original DoubleSHARP code is **Apache 2.0**. The complete pipeline has separate model restrictions: **SHARP's checkpoint is restricted to noncommercial scientific research and excludes product development**, and **DA3 Giant is CC BY-NC 4.0**. The code license does not expand those model permissions. See [THIRD_PARTY.md](THIRD_PARTY.md), [NOTICE](NOTICE), and [licenses](licenses).
 
 The example photographs and rendered screenshots are excluded from the source-code license. This is an independent research experiment using Apple SHARP and ByteDance's Depth Anything 3.

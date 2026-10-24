@@ -1,6 +1,6 @@
 # Method and measurements
 
-DoubleSharp integrates the released Apple SHARP and Depth Anything 3 models at inference time. The reference photograph supplies SHARP image features; both photographs supply DA3 depth and camera-pose estimates.
+DoubleSHARP integrates the released Apple SHARP and Depth Anything 3 models at inference time. The reference photograph supplies SHARP image features; both photographs supply DA3 depth and camera-pose estimates.
 
 ## Depth preparation
 
@@ -18,7 +18,7 @@ Reconstructed from the exact published source-image copies on an Apple M4 Pro wi
 | Joint DA3 depth and pose | 11.71 |
 | Depth-conditioned SHARP | 19.35 |
 
-- Baseline and DoubleSharp each contain **1,179,648 Gaussians**.
+- Baseline and DoubleSHARP each contain **1,179,648 Gaussians**.
 - Initializer, feature model, prediction head and Gaussian composer each ran exactly once in the conditioned pass.
 - Every Gaussian output field is finite; all scales are positive.
 - All five Gaussian output fields change from baseline: positions, sizes, orientations, colors and opacities.
@@ -31,7 +31,7 @@ See [provenance.json](../examples/tree/provenance.json) for source hashes, model
 
 The paired images are original 1280 × 720 browser screenshots, with 45° horizontal orbit, zero pitch, target `(0, 0, -2)` and camera distance `4` in the estimated scene units. Each scene uses exactly the same camera and field of view. The camera is pulled back equally to keep the baseline's displaced canopy in frame. The WebGL preview uses the exported splat's color, opacity, scale and rotation parameters. There is no retouching or separate per-scene framing.
 
-The 45° view reveals the baseline canopy/pedestal depth discontinuity. DoubleSharp reduces the separation on this capture. Both scenes have visible incomplete surfaces, floaters and disocclusion artifacts. A 45° orbit is a diagnostic stress view; small viewpoint changes are the more suitable presentation range for the underlying monocular reconstruction.
+The 45° view reveals the baseline canopy/pedestal depth discontinuity. DoubleSHARP reduces the separation on this capture. Both scenes have visible incomplete surfaces, floaters and disocclusion artifacts. A 45° orbit is a diagnostic stress view; small viewpoint changes are the more suitable presentation range for the underlying monocular reconstruction.
 
 ## Limits
 

@@ -2,7 +2,7 @@ from pathlib import Path
 import json
 root=Path(__file__).resolve().parents[1]
 s=(root/'vendor/free-splatter.cpp/web/index.html').read_text()
-s=s.replace('<title>free-splatter.cpp — gaussian splatting demo</title>','<title>DoubleSharp viewer</title>')
+s=s.replace('<title>free-splatter.cpp — gaussian splatting demo</title>','<title>DoubleSHARP viewer</title>')
 s=s.replace('<h1>free-splatter.cpp</h1>','<h1 id="view-title">SHARP</h1>')
 s=s.replace('3D gaussian scene from 2 photos — CPU/Vulkan engine, WebGL render.','Local SHARP · full resolution Gaussians')
 s=s.replace('</style>', '''#panel {top:8px;left:8px;width:auto;padding:5px 9px;border-radius:6px;}
