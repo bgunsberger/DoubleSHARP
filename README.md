@@ -2,29 +2,41 @@
 
 An experimental two-photo depth-conditioning pipeline for [Apple SHARP](https://github.com/apple/ml-sharp), running locally on Apple Silicon.
 
-[Depth Anything 3](https://github.com/ByteDance-Seed/Depth-Anything-3) estimates depth jointly from both photos. DoubleSHARP supplies that depth to SHARP **before Gaussian initialization**, then reruns its learned Gaussian prediction. SHARP's image features still come from the reference photograph.
+## Start with one photograph
 
-## Tree example from the second photo camera
+SHARP turns a single photograph into a Gaussian splat. For this experiment, we started with this wire tree sculpture by the sea.
 
-Both renders below use the second photograph's complete camera pose and intrinsics, estimated jointly by DA3. Translation is converted to the shared SHARP scale. These are unretouched WebGL screenshots; the estimated camera has no independent calibration ground truth.
+[![The first photograph of the tree sculpture](examples/tree/reference-preview.jpg)](examples/tree/2026_10_L1101215.jpg)
 
-### Baseline SHARP
+From the original camera position, the reconstruction looked convincing. Moving the camera revealed a problem.
 
-![Baseline SHARP from the second photo camera](docs/images/sharp-baseline-second-view.png)
+## The tree comes apart
 
-### DoubleSHARP
+SHARP estimated much of the canopy too far behind the pedestal. From another viewpoint, the trunk appears disconnected from its roots, and the canopy floats away from the base.
 
-![DoubleSHARP from the second photo camera](docs/images/doublesharp-second-view.png)
+![Baseline SHARP showing the canopy separated from the pedestal](docs/images/sharp-baseline-second-view.png)
 
-Baseline SHARP places much of the canopy too far behind the pedestal, producing a visible separation when viewed from the side. In this capture, conditioning SHARP on joint two-view depth brings the canopy closer to the pedestal and reduces that separation. Floaters, incomplete surfaces, and disocclusion artifacts remain visible at this angle. This is one qualitative example with no depth ground truth.
+The first photo alone leaves ambiguity about how the branches, trunk and pedestal fit together in depth.
 
-### Source photographs
+## Add a second photograph
 
-| Reference photo | Second view |
-| --- | --- |
-| [![Reference photograph](examples/tree/reference-preview.jpg)](examples/tree/2026_10_L1101215.jpg) | [![Second-view photograph](examples/tree/second-view-preview.jpg)](examples/tree/2026_10_L1101219.jpg) |
+A second view gives us more evidence about that geometry.
 
-Both full-resolution **8368 × 5584** JPEGs are included in [examples/tree](examples/tree). Location and device-serial metadata have been removed from the published copies. Decoded image pixels and the focal-length metadata used by SHARP are preserved.
+[![The second photograph of the same tree sculpture](examples/tree/second-view-preview.jpg)](examples/tree/2026_10_L1101219.jpg)
+
+[Depth Anything 3](https://github.com/ByteDance-Seed/Depth-Anything-3) processes both photographs together to estimate depth and their relative camera poses. DoubleSHARP uses that joint depth estimate to guide a fresh SHARP reconstruction.
+
+## Rebuild with the two-view depth
+
+DoubleSHARP supplies the depth to SHARP **before Gaussian initialization**, then reruns its learned Gaussian prediction. SHARP's image features still come from the first photograph.
+
+![DoubleSHARP reducing the canopy and pedestal separation](docs/images/doublesharp-second-view.png)
+
+The canopy now sits closer to the pedestal, reducing the visible separation. Fine branch structure is retained, while floaters and incomplete surfaces remain visible.
+
+Both splat screenshots use exactly the same camera: the second photograph's complete pose and intrinsics, estimated by DA3. They are unretouched WebGL captures. This is one qualitative example with no independently calibrated camera or depth ground truth; the second photograph is an input to the depth model, so this is not a held-out-view test.
+
+Both full-resolution **8368 × 5584** source JPEGs are included in [examples/tree](examples/tree). Location and device-serial metadata have been removed from the published copies. Decoded image pixels and the focal-length metadata used by SHARP are preserved.
 
 ## Run locally
 
